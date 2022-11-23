@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.253">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Akvo Foundation">
+
+<title>Data Preparation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Preparation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Akvo Foundation </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
+<p>In this context data preparation will entail the following:</p>
+<ul>
+<li><strong>Data health and understanding</strong> - Entails R-codes and functions and implemented on your data frame with an aim of understanding the nature/structure of the data frame and its contents.<br>
+</li>
+<li><strong>Data wrangling</strong> - Also known as data munging or data massaging. It is the process of transforming/mapping raw data from one format to another format to make it suitable for data analysis and data visualisation.</li>
+</ul>
+<p>Given the nature of data frame for this assignment, we’ll cover one aspect of data wrangling called merging. A process of combining two dataframes that we’ll for the rest of the course.</p>
+<section id="merging" class="level4">
+<h4 class="anchored" data-anchor-id="merging">Merging</h4>
+<p>Data merging is a method of combining two or more dataframes using an identifier that’s similar on both datasets with an aim of creating a singular data set for analysis or further related work.</p>
+<p>To derive the final dataset for this module and follow-up modules, Four different data sets shared by Solidaridad will be merged to form one final dataset. The merging in this context is sequential</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In your R-script, Load the libraries readxl and tidyverse.  </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># readxl package is used to load packages which have the format .xlsx</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse is a collection of packages used for data manipulation, data exploration and data visualisation </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># In this case we'll use functions present in the dplyr package found in the tidyverse package to merge the datasets</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the first dataset to merge. This data contains farm details for palm oil farmers</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>part1_oil_farm_details <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/swabeneficiaryintake2-oil_fam_det.xlsx"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the second batch of the dataset</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>part1_oil_majority_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/swabeneficiaryintake2.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>dplyr</code>, one of the core packages found in the tidyverse package, provides verbs/actions that help you to solve most common data manipulation challenges. We’ll cover more in depth of how to use it in a dedicated chapter of Data Wrangling.</p>
+<p>In this case, however, we’ll use a function called <code>merge</code> found in <code>dplyr</code> to merge the data frames</p>
+<p>The <code>merge</code> function follows the same principle as the <a href="https://www.w3schools.com/sql/sql_join.asp">SQL JOIN syntax</a> in combining two dataframes. The syntax for joining two dataframes using the merge() function is:</p>
+<p><code>NewDF &lt;- merge(dataframe1, dataframe2, by.x, by.y, all, all.x, all.y, sort=T)</code></p>
+<p>where:</p>
+<ul>
+<li><strong>NewDF</strong>: New dataframe created from the merge</li>
+<li><strong>dataframe1</strong>: The first dataframe</li>
+<li><strong>dataframe2</strong>: The second dataframe</li>
+<li><strong>by.x</strong>: Column in the first dataframe that possess similar identifiers with the column in the second dataframe</li>
+<li><strong>by.y</strong>: Column in the second dataframe that possess similar identifiers with the column in the first dataframe</li>
+<li><strong>all</strong>: Takes a Boolean value of either TRUE or FALSE. If FALSE, the merge function returns only the rows that have been matched on both dataframe 1 and dataframe 2. Otherwise TRUE.</li>
+<li><strong>all.x</strong>: Takes a Boolean value of either TRUE or FALSE. If FALSE it returns matching rows from data frame 2, and puts them to dataframe one.</li>
+<li><strong>all.y</strong>: Takes a Boolean value of either TRUE or FALSE. If FALSE it returns matching rows from dataframe 1 and puts them on dataframe 2.</li>
+</ul>
+<p><em>Tip: to make comprehension of the <code>merge()</code> function simple, we’ll rename the column with similar ID’s in both dataframe 1 and dataframe 2 to have the same column name. We’ll call this column KEY</em></p>
+<p>Given the above syntax, there are 4 main methods of joining data frames using the merge function. These are:</p>
+<p><strong>Inner Join</strong></p>
+<p>Inner join keeps all rows that have match keys in both dataframe1 and dataframe2. Its the natural way dplyr handles merging. The syntax of inner join is</p>
+<p><code>NewDF &lt;- merge(data1frame, dataframe2, by="KEY, all = FALSE)</code></p>
+<p><strong>Full outer Join</strong></p>
+<p>Also known as Outer join, After merging data, it keeps ALL the rows in both dataframe1 and dataframe2. Incase the ID’s are not matching based on the column KEY in either rows, NA’s will be populated on them. The syntax for outer join is</p>
+<p><code>NewDF &lt;- merge(data1frame, dataframe2, by="KEY, all = TRUE)</code></p>
+<p><strong>Left Join</strong></p>
+<p>This function returns all records from the left dataframe (dataframe1) and only the matched records from right dataframe (dataframe2). The syntax is</p>
+<p><code>NewDF &lt;- merge(dataframe1,dataframe1,by="KEY",all.x=TRUE)</code></p>
+<p><strong>Right Join</strong></p>
+<p>This function returns all records from the right dataframe (dataframe2), and only the matched records from the left dataframe (dataframe1). The syntax is</p>
+<p><code>NewDF &lt;- merge(dataframe1,dataframe1,by="KEY",all.y=TRUE)</code></p>
+<p>In this case, we’ll do a left merge because we want to keep all the rows found in the baseline data (left dataframe) and bring in data that have matching ID’s from the other dataframe. (right dataframe).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll combine Oil farm details data and oil farmsize data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>part1_oil_farm_details <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/swabeneficiaryintake2-oil_fam_det.xlsx"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>part1_oil_farm_size <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/swabeneficiaryintake2-oil_fam_size.xlsx"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use left merge to form farm oil details data</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>part1_oil_farm_details_size <span class="ot">&lt;-</span> <span class="fu">merge</span>(part1_oil_farm_details, part1_oil_farm_size, <span class="at">by =</span> <span class="st">"KEY"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the third part of the dataset </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>part1_oil_majority_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/swabeneficiaryintake2.xlsx"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge farm oil details data and the third part of the data to form PartOne Oildata</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>part1_oil_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(part1_oil_majority_data, part1_oil_farm_details_size, <span class="at">by =</span> <span class="st">"KEY"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise 1</strong></p>
+<p>Assuming all your datasets are in the folder called Data:</p>
+<ul>
+<li><p>Use <code>read_excel()</code> function to import <em>swaintake3sat4bus-oil_fam_det.xlsx</em> and assign it the name <em>part2_oil_farm_details</em>. Also import the dataset <em>swaintake3sat4bus-oil_fam_size.xlsx</em> and assign it the name <em>part2_oil_farm_size</em></p></li>
+<li><p>Use left join to merge <em>part2_oil_farm_details</em> (left dataframe) and <em>part2_oil_farm_size</em>. The final dataframe should be called <em>part2_oil_farm_details_size</em></p></li>
+<li><p>Finally, import the dataset <em>swaintake3sat4bus.xlsx</em>. Assign it the name <em>part2_oil_majority_data</em>. Use left join to merge <em>part2_oil_majority_data</em> (left dataframe) and <em>part2_oil_farm_details_size</em> to form a final dataframe called <em>part2_oil_data</em></p></li>
+</ul>
+<div class="cell">
+
+</div>
+<p>Now that we have <code>part1_oil_data</code> and <code>part2_oil_data</code> data frames, we’ll use bind_rows() to combine rows of the two dataframes. This function is independent of any identifier.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for binding the rows</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(part1_oil_data, part2_oil_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, this dataset will be the one to use for analysis. Given the huge number of columns we’ve manually selected some columns that have a representation of the whole structure of the dataframe. We’ll share with you the code separately for the subsetting this data.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="data-understanding" class="level3">
+<h3 class="anchored" data-anchor-id="data-understanding">Data understanding</h3>
+<p>There are various functions one uses to get an understanding of the content and structure of the data frame:</p>
+<ul>
+<li><code>dim()</code>: Function that returns the dimensions of the dataframe. i.e.&nbsp;the total number of rows and columns present in the dataframe</li>
+<li><code>str()</code>: Returns the data type of each object present in the dataframe, in addition to the dataframes dimensions</li>
+<li><code>head()</code>: Returns the first 5 rows of the dataframe</li>
+<li><code>tail()</code>: Returns the last 5 rows of the dataframe</li>
+</ul>
+<p><strong>Exercise 2</strong></p>
+<ul>
+<li>Run the below functions on your data to see the components of the structure of the data per the function</li>
+<li>How can you modify either the <code>head()</code> or the <code>tail()</code> function to display either the first or the last 10 rows of your data?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data dimensions</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#structure of the dataset</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># First 5 rows of the dataframe</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Last 5 rows of the dataframe</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="handling-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="handling-missing-values">Handling missing values</h3>
+<p>Missing values present in the dataset can be as a result of many dependent or independent factors. Nonetheless, it’s wise to investigate occurrence of missing values to know which mitigating efforts are appropriate in applying to the dataset</p>
+<p>A convenient way to get the total number of missing values in a column is using the <code>colSums()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code for showing count of missing values per column in the data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise 3 </strong></p>
+<ul>
+<li>Using the <code>dim()</code> function, we found out that the data has 96 columns, out of these which column has the highest missing values when you run the above function?</li>
+<li>Might you know why it has that high count of missing values?</li>
+</ul>
+<p>Another way of skimming through missing data is by use of <code>naniar</code> package. Naniar provides inbuilt functions that summarises, visualises and manipulate missing data with minimal deviations. After installing the package, load the library naniar in your R-Workspace. We’ll use Then use the functions <code>miss_var_summary()</code> and <code>gg_miss_var()</code> to view and visualise count of missing data per column, respectively.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Table of count of missing per column</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">miss_var_summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 3
+   variable                     n_miss pct_miss
+   &lt;chr&gt;                         &lt;int&gt;    &lt;dbl&gt;
+ 1 pi_write_languages_th          7347     98.8
+ 2 cocoa_fg_benefits              6615     89.0
+ 3 fs_experience_months           6386     85.9
+ 4 difficulty_food_satisfaction   6386     85.9
+ 5 oilpalm_nr_farms               6089     81.9
+ 6 pi_write_languages_which       4969     66.8
+ 7 cocoa_fg_yn                    3963     53.3
+ 8 cocoa_nr_farms                 3963     53.3
+ 9 f_services_access_type         3642     49.0
+10 f_inputs_source                3642     49.0
+# … with 86 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualise the missing data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_var</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you can see, the plot is not that visible due to the high number of columns present in the dataframe. Hence in this kind of a situation, it’s best to use a table.</p>
+<p><strong>Exercise 4</strong></p>
+<ul>
+<li>What is the column with the highest count of missing values?</li>
+<li>Was the answer you got the same as the one you had when you ran the function <code>colSums(is.na(data))</code>?</li>
+<li>Finally, can you tell the difference in the data representation between output from <code>colSums(is.na(data))</code>and output from <code>miss_var_summary(data)</code></li>
+<li>In your own opinion, what do you do with columns that have over 70% of their data missing?</li>
+</ul>
+<p><em>As for the last question, the answer usually is context specific, one can choose to analyse the repsonses on the column if it was answers based on dependent question, however in most cases, columns that have almost 80% of its responses missing are usually not statistically significant.</em></p>
+<p>Documentation and other functions that handle missing data can be found here: <a href="https://naniar.njtierney.com/">https://naniar.njtierney.com/</a></p>
+</section>
+<section id="outlier-detection" class="level3">
+<h3 class="anchored" data-anchor-id="outlier-detection">Outlier detection</h3>
+<p>An outlier is an observarion, that differs significantly from patterns observed in other observations. In most cases, outlier detection is usually implemented in continous variables. Moreso, in variables that change due to stochastic environments. When handling outliers its good to note that they might be a case of extreme value(s) among the observations or due to human error. Hence, in this section I’ll help you detect them and then thereafter, its your choice to either impute those values with the mean, median, mode or any other value. The decision is context specific.</p>
+<p>We’ll use the age column for outlier detection practice. Below are ways in which one detects outliers.</p>
+<p><em>Boxplot</em></p>
+<p>Boxplots are a measure of distribution of numerical observations are in a data framebased on a five number summary (“minimum”, first quartile [Q1], median, third quartile [Q3] and “maximum”).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data<span class="sc">$</span>age,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"age"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>A quick inference from the boxplot indicates that most outliers lie above the median age.</p>
+<p>It is possible to narrow down to the exact values in the age column that are outliers using the InterQuartile Range Criterin (IQR). To do this, type the following function in the R-script?.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot.stats</span>(data<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$stats
+[1] 15 35 45 54 82
+
+$n
+[1] 7435
+
+$conf
+[1] 44.65185 45.34815
+
+$out
+ [1]  86  83  92  89  83  95  84  88  86  85  92  85  86  90  90  84  97  90  89
+[20]  85 100  87  87   1 100  85 130  90</code></pre>
+</div>
+</div>
+<p>Did you notice that outliers, represented using the $out, the values are above the median?</p>
+<p>We can further narrow down to the specific rows that contain the outliers using the <code>which()</code> function. To do this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assumption is that you already have tidyverse loaded</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">boxplot.stats</span>(data<span class="sc">$</span>age)<span class="sc">$</span>out</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>out_ind <span class="ot">&lt;-</span> <span class="fu">which</span>(data<span class="sc">$</span>age <span class="sc">%in%</span> <span class="fu">c</span>(out))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>out_ind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]   63  306 1659 1962 2075 2185 2241 2407 3187 3679 3902 4158 4268 4383 4411
+[16] 4607 4880 4884 4997 5258 5402 5625 5904 6220 6225 6241 6671 7001</code></pre>
+</div>
+</div>
+<p>Above output shows the rownumbers in the dataframe of where the outliers lie. Tp print all the variables where these outliers lie in the datafrae:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View all variables in the dataframe where the outliers lie</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data[out_ind,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise 5</strong></p>
+<ul>
+<li>Now that we’ve detected the outliers, and their positions in the dataframe, what do you think are the appropriate measures in handling them?</li>
+<li>In R, plot a histogram of age. In your opinion, which one gives more visual information about presence of outliers. A histogram or a boxplot?</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

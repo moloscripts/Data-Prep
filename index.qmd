@@ -1,0 +1,295 @@
+---
+title: "Data Preparation"
+author: "Akvo Foundation"
+format: html
+---
+
+## Data Preparation
+
+In this context data preparation will entail the following:
+
+-   **Data health and understanding** - Entails R-codes and functions and implemented on your data frame with an aim of understanding the nature/structure of the data frame and its contents.\
+-   **Data wrangling** - Also known as data munging or data massaging. It is the process of transforming/mapping raw data from one format to another format to make it suitable for data analysis and data visualisation.
+
+Given the nature of data frame for this assignment, we'll cover one aspect of data wrangling called merging. A process of combining two dataframes that we'll for the rest of the course.
+
+#### Merging
+Data merging is a method of combining two or more dataframes using an identifier that's similar on both datasets with an aim of creating a singular data set for analysis or further related work.
+
+To derive the final dataset for this module and follow-up modules, Four different data sets shared by Solidaridad will be merged to form one final dataset. The merging in this context is sequential 
+
+
+```{r}
+#| warning: false
+#| echo: true
+
+# In your R-script, Load the libraries readxl and tidyverse.  
+# readxl package is used to load packages which have the format .xlsx
+# tidyverse is a collection of packages used for data manipulation, data exploration and data visualisation 
+# In this case we'll use functions present in the dplyr package found in the tidyverse package to merge the datasets
+
+library(readxl)
+library(tidyverse)
+
+# Load the first dataset to merge. This data contains farm details for palm oil farmers
+part1_oil_farm_details <- read_excel("Data/swabeneficiaryintake2-oil_fam_det.xlsx")
+
+# Load the second batch of the dataset
+part1_oil_majority_data <- read_excel("Data/swabeneficiaryintake2.xlsx")
+```
+
+`dplyr`, one of the core packages found in the tidyverse package, provides verbs/actions that help you
+to solve most common data manipulation challenges. We'll cover more in depth of how to use it in a dedicated chapter of Data Wrangling. 
+
+In this case, however, we'll use a function called `merge` found in `dplyr` to merge the data frames
+
+The `merge` function follows the same principle as the [SQL JOIN syntax](https://www.w3schools.com/sql/sql_join.asp) in combining two dataframes. 
+The syntax for joining two dataframes using the merge() function is: 
+
+`NewDF <- merge(dataframe1, dataframe2, by.x, by.y, all, all.x, all.y, sort=T)`
+
+where: 
+
+* **NewDF**:  New dataframe created from the merge
+* **dataframe1**: The first dataframe
+* **dataframe2**: The second dataframe
+* **by.x**: Column in the first dataframe that possess similar identifiers with the column in the second dataframe
+* **by.y**: Column in the second dataframe that possess  similar identifiers with the column in the first dataframe
+* **all**: Takes a Boolean value of either TRUE or FALSE. If FALSE, the merge function returns only the rows that have been matched on both dataframe 1 and dataframe 2. Otherwise TRUE.
+* **all.x**: Takes a Boolean value of either TRUE or FALSE. If FALSE  it returns matching rows from data frame 2, and puts them to dataframe one.
+* **all.y**: Takes a Boolean value of either TRUE or FALSE. If FALSE it returns matching rows from dataframe 1 and puts them on dataframe 2.
+
+*Tip: to make comprehension of the `merge()` function simple, we'll rename the column with similar ID's in both dataframe 1 and dataframe 2 to have the same column name. We'll call this column KEY*
+
+Given the above syntax, there are 4 main methods of joining data frames using the merge function. These are: 
+
+**Inner Join**
+
+Inner join keeps all rows that have match keys in both dataframe1 and dataframe2. Its the natural way dplyr handles merging. The syntax of inner join is 
+
+`NewDF <- merge(data1frame, dataframe2, by="KEY, all = FALSE)`
+
+**Full outer Join**
+
+Also known as Outer join, After merging data, it keeps ALL the rows in both dataframe1 and dataframe2. Incase the ID's are not matching based on the column KEY in either rows, NA's will be populated on them. The syntax for outer join is 
+
+`NewDF <- merge(data1frame, dataframe2, by="KEY, all = TRUE)`
+
+**Left Join**
+
+This function returns all records from the left dataframe (dataframe1) and only the matched records from right dataframe (dataframe2). The syntax is  
+
+`NewDF <- merge(dataframe1,dataframe1,by="KEY",all.x=TRUE)`
+
+**Right Join**
+
+This function returns all records from the right dataframe (dataframe2), and only the matched records from the left dataframe (dataframe1). The syntax is  
+
+`NewDF <- merge(dataframe1,dataframe1,by="KEY",all.y=TRUE)`
+
+In this case, we'll do a left merge because we want to keep all the rows found in the baseline data (left dataframe) and bring in data that have matching ID's from the other dataframe. (right dataframe). 
+
+```{r}
+# We'll combine Oil farm details data and oil farmsize data
+part1_oil_farm_details <- read_excel("Data/swabeneficiaryintake2-oil_fam_det.xlsx")
+part1_oil_farm_size <- read_excel("Data/swabeneficiaryintake2-oil_fam_size.xlsx")
+
+# Use left merge to form farm oil details data
+part1_oil_farm_details_size <- merge(part1_oil_farm_details, part1_oil_farm_size, by = "KEY", all.x = TRUE)
+
+# Import the third part of the dataset 
+part1_oil_majority_data <- read_excel("Data/swabeneficiaryintake2.xlsx")
+
+# Merge farm oil details data and the third part of the data to form PartOne Oildata
+part1_oil_data <- merge(part1_oil_majority_data, part1_oil_farm_details_size, by = "KEY", all.x = TRUE)
+```
+
+**Exercise 1**
+
+Assuming all your datasets are in the folder called Data:  
+
+* Use `read_excel()` function to import *swaintake3sat4bus-oil_fam_det.xlsx* and assign it the name *part2_oil_farm_details*. Also import the dataset *swaintake3sat4bus-oil_fam_size.xlsx* and assign it the name *part2_oil_farm_size*
+* Use left join to merge *part2_oil_farm_details* (left dataframe) and *part2_oil_farm_size*. The final dataframe should be called *part2_oil_farm_details_size*
+
+* Finally, import the dataset  *swaintake3sat4bus.xlsx*. Assign it the name *part2_oil_majority_data*. Use left join to merge *part2_oil_majority_data* (left dataframe) and  *part2_oil_farm_details_size* to form a final dataframe called *part2_oil_data* 
+
+```{r, Exercise 1 Solution }
+#| warning: false
+#| echo: false
+
+# This Block of code contains solution to the above exerise, to hide it from the Quarto Document, make sure you add the the two lines 118 & 119 to any Code-block of R
+
+part2_oil_farm_details <- read_excel("Data/swaintake3sat4bus-oil_fam_det.xlsx")
+part2_oil_farm_size <- read_excel("Data/swaintake3sat4bus-oil_fam_size.xlsx")
+part2_oil_majority_data <- read_excel("Data/swaintake3sat4bus.xlsx")
+
+part2_oil_farm_details_size <- merge(part2_oil_farm_details, part2_oil_farm_size, by = "KEY", all.x = TRUE)
+part2_oil_data <- merge(part2_oil_majority_data, part2_oil_farm_details_size, by = "KEY", all.x = TRUE)
+
+```
+
+Now that we have `part1_oil_data` and `part2_oil_data` data frames, we'll use bind_rows() to combine rows of the two dataframes. This function is independent of any identifier. 
+
+```{r}
+# Code for binding the rows
+data <- bind_rows(part1_oil_data, part2_oil_data)
+```
+
+Finally, this dataset will be the one to use for analysis. Given the huge number of columns we've manually selected some columns that have a representation of the whole structure of the dataframe. We'll share with you the code separately for the subsetting this data.
+
+```{r}
+#| warning: false
+#| echo: false
+
+# @Jildemarie  - Share with them this code
+source("Scripts/subset.R")
+```
+
+### Data understanding
+
+There are various functions one uses to get an understanding of the content and structure of the data frame:
+
+* `dim()`: Function that returns the dimensions of the dataframe. i.e. the total number of rows and columns present in the dataframe
+* `str()`: Returns the data type of each object present in the dataframe, in addition to the dataframes dimensions
+* `head()`: Returns the first 5 rows of the dataframe
+* `tail()`: Returns the last 5 rows of the dataframe
+
+**Exercise 2**
+
+* Run the below functions on your data to see the components of the structure of the data per the function 
+* How can you modify either the `head()` or the `tail()` function to display either the first or the last 10 rows of your data? 
+
+```{r}
+#| output: false
+
+# Data dimensions
+dim(data)
+
+#structure of the dataset
+str(data)
+
+# First 5 rows of the dataframe
+head(data)
+
+# Last 5 rows of the dataframe
+tail(data)
+```
+
+
+### Handling missing values
+Missing values present in the dataset can be as a result of many dependent or independent factors. Nonetheless, it's wise to investigate occurrence of missing values to know which mitigating efforts are appropriate in applying to the dataset
+
+A convenient way to get the total number of missing values in a column is using the `colSums()`. 
+
+```{r}
+#| output: false
+
+# Code for showing count of missing values per column in the data
+colSums(is.na(data))
+```
+
+**Exercise 3 ** 
+
+* Using the `dim()` function, we found out that the data has 96 columns, out of these which column has the highest missing values when you run the above function? 
+* Might you know why it has that high count of missing values? 
+
+Another way of skimming through missing data is by use of `naniar` package. Naniar provides inbuilt functions that summarises, visualises and manipulate missing data with minimal deviations. 
+After installing the package, load the library naniar in your R-Workspace. We'll use Then use the functions `miss_var_summary()` and `gg_miss_var()` to view and visualise count of missing data per column, respectively. 
+
+```{r}
+#| warning: false
+
+
+library(naniar)
+
+# Table of count of missing per column
+miss_var_summary(data)
+
+# visualise the missing data
+gg_miss_var(data)
+```
+
+As you can see, the plot is not that visible due to the high number of columns present in the dataframe. Hence in this kind of a situation, it's best to use a table.
+
+**Exercise 4**
+
+* What is the column with the highest count of missing values?
+* Was the answer you got the same as the one you had when you ran the function `colSums(is.na(data))`?
+* Finally, can you tell the difference in the data representation between output from `colSums(is.na(data)) `and output from `miss_var_summary(data)`
+* In your own opinion, what do you do with columns that have over 70% of their data missing? 
+
+*As for the last question, the answer usually is context specific, one can choose to analyse the repsonses on the column if it was answers based on dependent question, however in most cases, columns that have almost 80% of its responses missing are usually not statistically significant.*
+
+Documentation and other functions that handle missing data can be found here: [https://naniar.njtierney.com/](https://naniar.njtierney.com/)
+
+
+### Outlier detection
+An outlier is an observarion, that differs significantly from patterns observed in other observations. In most cases, outlier detection is usually implemented in continous variables. Moreso, in variables that change due to stochastic environments. 
+When handling outliers its good to note that they might be a case of extreme value(s) among the observations or due to human error. Hence, in this section
+I'll help you detect them and then thereafter, its your choice to either impute those values with the mean, median, mode or any other value. The decision is context specific. 
+
+We'll use the age column for outlier detection practice. Below are ways in which one detects outliers. 
+
+*Boxplot* 
+
+Boxplots are a measure of distribution of numerical observations are in a data framebased on a five number summary (“minimum”, first quartile [Q1], median, third quartile [Q3] and “maximum”). 
+
+```{r}
+boxplot(data$age,
+  ylab = "age"
+)
+```
+
+A quick inference from the boxplot indicates that most outliers lie above the median age.
+
+It is possible to narrow down to the exact values in the age column that are outliers using the InterQuartile Range Criterin (IQR). 
+To do this, type the following function in the R-script?.
+
+```{r}
+boxplot.stats(data$age)
+```
+
+Did you notice that outliers, represented using the $out, the values are above the median? 
+
+We can further narrow down to the specific rows that contain the outliers using the `which()` function.  To do this: 
+
+```{r}
+# Assumption is that you already have tidyverse loaded
+library(tidyverse)
+
+# 
+out <- boxplot.stats(data$age)$out
+out_ind <- which(data$age %in% c(out))
+out_ind
+```
+Above output shows the rownumbers in the dataframe of where the outliers lie. Tp print all the variables where these outliers lie in the datafrae:
+
+```{r}
+#| output: false
+
+# View all variables in the dataframe where the outliers lie
+data[out_ind,]
+```
+
+**Exercise 5**
+
+* Now that we've detected the outliers, and their positions in the dataframe, what do you think are the appropriate measures in handling them? 
+* In R, plot a histogram of age. In your opinion, which one gives more visual information about presence of outliers. A histogram or a boxplot? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
